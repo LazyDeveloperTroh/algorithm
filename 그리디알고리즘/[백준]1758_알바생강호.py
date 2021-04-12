@@ -1,22 +1,19 @@
-permutation_array = []
-def permutation(array, start, end):
-    if start == end:
-        return permutation_array.append(array)
-    for i in range(start, end+1):
-        tempArray = list(array)
+# [해결전략]
+# 팁을 내림차순으로 정렬하는 것이 가장 베스트가 아닐까?
 
-        temp = tempArray[i] 
-        tempArray[i] = tempArray[start]
-        tempArray[start] = temp
+# 사람수
+N = int(input())
 
-        permutation(tempArray, start+1, end)
-
-# 사람의 수
-n = int(input())
-
-# 팁
 tips = []
-for i in range(n):
+for i in range(N):
     tips.append(int(input()))
 
-print(permutation_array)
+tips.sort(reverse=True)
+print(tips)
+
+sum = 0
+for i in range(len(tips)):
+    tip = tips[i] - i
+    if tip > 0:
+        sum += tip
+print(sum)
