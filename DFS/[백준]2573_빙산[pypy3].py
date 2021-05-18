@@ -20,9 +20,9 @@ def get_unmelt_cnt():
     return cnt
 
 years = 0
-
 while get_unmelt_cnt() != 0:    
-    sea_write = [[0] * M for _ in range(N)]
+    copy_sea = deepcopy(sea)
+
     visited = [[False] * M for _ in range(N)]# 방문비교
     stack = []
     dfs = False # 탐색이력
@@ -44,7 +44,6 @@ while get_unmelt_cnt() != 0:
                             continue
 
                         visited[top[0]][top[1]] = True
-                        cnt = 0
                         for i in range(4):
                             yPos = top[0]+dy[i]
                             xPos = top[1]+dx[i]
@@ -53,10 +52,8 @@ while get_unmelt_cnt() != 0:
                             # 각 방향에 바다가 있으면 COPY와 비교하여 처음부터 바다였는지 비교하고 녹임
                             if sea[yPos][xPos] > 0 and visited[yPos][xPos] == False:
                                 stack.append([yPos, xPos])    
-                            elif sea[top[0]][top[1]] > 0 and sea[yPos][xPos] == 0:
-                                cnt+=1
-                        sea_write[top[0]][top[1]] = (sea[top[0]][top[1]] - cnt)
+                            elif sea[top[0]][top[1]] > 0 and sea[yPos][xPos] == 0 and copy_sea[yPos][xPos] == 0:
+                                sea[top[0]][top[1]] -= 1
                     dfs = True
     years += 1
-    sea = sea_write
 print(0)
