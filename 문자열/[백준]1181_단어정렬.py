@@ -1,13 +1,15 @@
 N = int(input())
-result = []
+datas = set()
 
 for _ in range(N):
     s = input()
-    result.append(s)
+    datas.add(s)
+    
+result = list(datas)
 
 # 정렬
-for i in range(0, N):
-    for j in range(0, N-1-i):
+for i in range(0, len(result)):
+    for j in range(0, len(result)-1-i):
         if len(result[j]) > len(result[j+1]):
             temp = result[j+1]
             result[j+1] = result[j]
@@ -22,7 +24,5 @@ for i in range(0, N):
                     result[j] = temp
                     break
 
-print(result)
-
-
-
+for r in result:
+    print(r, end=" ")
