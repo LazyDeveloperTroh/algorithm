@@ -1,3 +1,2 @@
-
-a = '1234567'
-print(list(map(int, list(a))))
+for i in range(0   , 2):
+    print(i)
