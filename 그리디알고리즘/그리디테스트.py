@@ -1,1 +1,2 @@
-print('그리디 알고리즘')
+for i in range(0,10):
+    print(i)
