@@ -1,31 +1,42 @@
+import sys
+input = sys.stdin.readline
+
 N = int(input())
-inputs = []
-for i in range(N):
-    inputs.append(int(input()))
+input_data = []
+for _ in range(N):
+    input_data.append(int(input()))
 
-inputs.sort()
+to_up_total = 0 # 첫번째 인덱스에서 시작한 최대값
+idx = 0
+while idx < N-1:
+    if input_data[idx] < 0 and input_data[idx+1] < 0:
+        to_up_total += input_data[idx]*input_data[idx+1]
+        idx += 2
+    elif input_data[idx] < 0 and input_data[idx+1] == 0:
+        to_up_total += input_data[idx]*input_data[idx+1]
+        idx += 2
+    elif input_data[idx] <= 0 and input_data[idx+1] > 0:
+        to_up_total += input_data[idx]
+        idx += 1
+    else:
+        to_up_total += input_data[idx]*input_data[idx+1]
+        idx += 2
+if idx == N-1:
+    to_up_total += input_data[N-1]
 
-result = 0
-for i in range(0, len(inputs), 2):
-    if i == len(inputs)-1:
-        result += inputs[i]
-        break
-
-    value = inputs[i]*inputs[i+1]
-    if value > 0:
-        result += value
-    elif value == 0:
-        if inputs[i] < 0:
-            result += 0
-        else:
-            result += inputs[i+1]
-    else: 
-        # 부호가 바뀌는 시점
-        result += inputs[i]
-        result += inputs[i+1]
-
-        # 인덱스 i+1부터 N-1까지 홀수라면..
-        if (N-1-(i+1)+1) % 2 != 0:
-            result += i+2
-            i+=1
-print(result)
+    
+to_down_total = 0 # 마지막 인덱스에서 시작한 최대값
+idx = len(input_data)
+while idx > 0:
+    if input_data[idx] > 0 and input_data[idx-1] > 0:
+        to_down_total += input_data[idx]*input_data[idx-1]
+        idx -= 2
+    elif input_data[idx] > 0 and input_data[idx-1] == 0:
+        to_down_total += input_data[idx]
+        idx -= 1
+    elif input_data[idx] < 0 and input_data[idx-1] < 0:
+        to_down_total += input_data[idx]*input_data[idx-1]
+        idx -= 2
+if idx == 0:
+    to_down_total += input_data[0]
+print(max(to_up_total, to_down_total))
