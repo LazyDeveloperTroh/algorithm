@@ -7,7 +7,6 @@ for _ in range(t):
     current_price = prices[n-1]
     total_price = 0
     for i in range(n-2, -1, -1):
-        print(i)
         if current_price > prices[i]:
             total_price += (current_price - prices[i])
         else:
