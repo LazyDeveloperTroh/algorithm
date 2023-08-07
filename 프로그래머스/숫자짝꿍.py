@@ -16,8 +16,8 @@ def solution(X, Y):
         for _ in range(minCnt):
             result += str(i)
     if result == "":
-        return result
-    if int(result) == 0:
+        return "-1"
+    if result[0] == "0":
         return "0"
     return result
 
