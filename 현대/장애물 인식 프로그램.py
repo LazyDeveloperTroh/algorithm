@@ -20,7 +20,10 @@ for i in range(n):
 
             while q:
                 x, y = q.popleft()
+                
                 # 해당위치 방문처리, 장애물 수 증가
+                # 0인지 한번 더 체크하는 이유? 큐에서 뽑을 때 방문처리를 하기때문에
+                # 방문 처리 이전에 같은 노드를 탐색한다면 큐에 중복으로 들어갈수있기 때문
                 if arr[y][x] == 0:
                     continue
                 arr[y][x] = 0
@@ -32,7 +35,6 @@ for i in range(n):
                     if nx < 0 or nx >= n or ny < 0 or ny >= n:
                         continue
                     if arr[ny][nx] == 1:
-                        print(y, x, [ny, nx])
                         q.append([nx, ny])
             result.append(cnt)
 result.sort()
