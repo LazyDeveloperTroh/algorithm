@@ -9,7 +9,6 @@ for _ in range(m):
     graph[v2-1].append(v1-1)
 for i in range(len(graph)):
     graph[i].sort()
-print(graph)
 
 visited = [False] * n
 def dfs(v):

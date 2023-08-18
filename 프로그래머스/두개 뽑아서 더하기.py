@@ -16,8 +16,12 @@ def comb(arr, n):
     
 def solution(numbers):
     result = comb(numbers, 2)
-    print(result)
-    answer = []
+    addSet = set()
+    for v1,v2 in result:
+        addSet.add(v1+v2)
+
+    answer = list(addSet)
+    answer.sort()
     return answer
 
 print(solution([2, 1,3,4,1]))

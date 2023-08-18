@@ -10,7 +10,6 @@ for _ in range(n):
 
 # price 오름차순 정렬
 datas.sort(key=lambda x:x[1], reverse=True)
-print(datas)
 
 result = 0
 for i in range(len(datas)):

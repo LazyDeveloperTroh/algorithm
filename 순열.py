@@ -1,24 +1,24 @@
-def permutation(arr, n):
-    result = []
-    if n == 0:
-        return [[]]
-    elif n == 1:
-        return [[i] for i in arr]
-    elif n >= 2:
-        for i in range(len(arr)):
-            elem = arr[i]
-            p = permutation(arr[:i] + arr[i+1:], n-1)
-            for rest in p:
-                result.append([elem]+rest)
-    return result
+from collections import deque
+def solution(bridge_length, weight, truck_weights):
+    stack = deque()
+    stack.append(truck_weights[0])
 
-# [[1, 2], [1, 3], [2, 1], [2, 3], [3, 1], [3, 2]]
-print(permutation([1,2,3], 2))
-# [[1, 2], [1, 3], [1, 4], [2, 1], [2, 3], [2, 4], [3, 1], [3, 2], [3, 4], [4, 1], [4, 2], [4, 3]]
-print(permutation([1,2,3,4], 2))
+    answer = 1    
+    i = 1
+    bridge_weight = truck_weights[0]
+    while i < len(truck_weights):
+        v = truck_weights[i]
+        print(i, v, bridge_weight, stack)
 
-from itertools import permutations
-# [[1, 2], [1, 3], [2, 1], [2, 3], [3, 1], [3, 2]]
-print(list(permutation([1,2,3], 2)))
-# [[1, 2], [1, 3], [1, 4], [2, 1], [2, 3], [2, 4], [3, 1], [3, 2], [3, 4], [4, 1], [4, 2], [4, 3]]
-print(list(permutation([1,2,3,4], 2)))
+        if bridge_weight+v <= weight and len(stack) < bridge_length:
+            i += 1
+            stack.append(v)
+            bridge_weight += v
+        elif stack:
+            bridge_weight -= stack.popleft()
+        answer+=1
+    if stack:
+        answer +=1
+    return answer
+
+print(solution(2, 10, [7,4,5,6]))
