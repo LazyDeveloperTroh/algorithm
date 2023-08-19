@@ -9,7 +9,7 @@ if len(buttons) < len(secret):
     print("normal")
 else:
     matched = None
-    for i in range(len(buttons)-len(secret)):
+    for i in range(len(buttons)-len(secret)+1):
         matched = True
         for j in range(len(secret)):
             if buttons[i+j] != secret[j]:
