@@ -4,5 +4,5 @@ def solution(arr):
         if arr[i] == arr[i-1]:
             continue
         else:
-            answer.append(i)
+            answer.append(arr[i])
     return answer

@@ -26,7 +26,6 @@ def solution(priorities, location):
             q.append([loc, priority])
             # 우선순위 비교 stack 복구
             prioritySortStack.append(maxPriority)
-            
     return answer
 
 print(solution([2, 1, 3, 2]	, 2))

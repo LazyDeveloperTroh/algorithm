@@ -5,7 +5,6 @@ def solution(progresses, speeds):
         remainProgress = 100-progresses[i]
         remain_day = int(remainProgress // speeds[i]) if remainProgress % speeds[i] == 0 else int(remainProgress // speeds[i])+1
         remain_days.append(remain_day)
-    print(remain_days)
     answer = []    
     # 배포 기준이 되는 남은날짜
     frontDays = remain_days[0] 
