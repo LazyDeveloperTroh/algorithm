@@ -1,4 +1,4 @@
-def permutation(arr, n):
+def comb(arr, n):
     result = []
     if n == 0:
         return [[]]
@@ -6,19 +6,29 @@ def permutation(arr, n):
         return [[i] for i in arr]
     elif n >= 2:
         for i in range(len(arr)):
-            elem = arr[i]
-            p = permutation(arr[:i] + arr[i+1:], n-1)
+            el = arr[i]
+            p = comb(arr[i+1:], n-1)
             for rest in p:
-                result.append([elem]+rest)
+                result.append([el]+rest)
     return result
 
-# [[1, 2], [1, 3], [2, 1], [2, 3], [3, 1], [3, 2]]
-print(permutation([1,2,3], 2))
-# [[1, 2], [1, 3], [1, 4], [2, 1], [2, 3], [2, 4], [3, 1], [3, 2], [3, 4], [4, 1], [4, 2], [4, 3]]
-print(permutation([1,2,3,4], 2))
+def solution(clothes):
+    clothMap = {}
+    for name, ty in clothes:
+        if clothMap.get(ty) == None:
+            clothMap[ty] = 1
+        else:
+            clothMap[ty] += 1
+    
+    answer = 0
+    types = list(clothMap.keys())
+    for i in range(1, len(types)+1):
+        results = comb(types, i)
+        for result in results:
+            cnt = 1
+            for r in result:
+                cnt *= clothMap[r]
+            answer += cnt
+    return answer
 
-from itertools import permutations
-# [[1, 2], [1, 3], [2, 1], [2, 3], [3, 1], [3, 2]]
-print(list(permutation([1,2,3], 2)))
-# [[1, 2], [1, 3], [1, 4], [2, 1], [2, 3], [2, 4], [3, 1], [3, 2], [3, 4], [4, 1], [4, 2], [4, 3]]
-print(list(permutation([1,2,3,4], 2)))
+print(solution([["yellow_hat", "headgear"], ["blue_sunglasses", "eyewear"], ["green_turban", "headgear"]]	))
