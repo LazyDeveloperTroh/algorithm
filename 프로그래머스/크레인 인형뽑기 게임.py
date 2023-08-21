@@ -10,6 +10,7 @@ def solution(board, moves):
     answer = 0
     before = []
     stack = []
+
     for m in moves:
         h = height[m-1]
         if h < len(board):
