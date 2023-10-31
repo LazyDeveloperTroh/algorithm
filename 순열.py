@@ -1,24 +1,34 @@
-from collections import deque
-def solution(bridge_length, weight, truck_weights):
-    stack = deque()
-    stack.append(truck_weights[0])
+def comb(arr, n):
+    result = []
+    if n == 0:
+        return [[]]
+    elif n == 1:
+        return [[i] for i in arr]
+    elif n >= 2:
+        for i in range(len(arr)):
+            el = arr[i]
+            p = comb(arr[i+1:], n-1)
+            for rest in p:
+                result.append([el]+rest)
+    return result
 
-    answer = 1    
-    i = 1
-    bridge_weight = truck_weights[0]
-    while i < len(truck_weights):
-        v = truck_weights[i]
-        print(i, v, bridge_weight, stack)
-
-        if bridge_weight+v <= weight and len(stack) < bridge_length:
-            i += 1
-            stack.append(v)
-            bridge_weight += v
-        elif stack:
-            bridge_weight -= stack.popleft()
-        answer+=1
-    if stack:
-        answer +=1
+def solution(clothes):
+    clothMap = {}
+    for name, ty in clothes:
+        if clothMap.get(ty) == None:
+            clothMap[ty] = 1
+        else:
+            clothMap[ty] += 1
+    
+    answer = 0
+    types = list(clothMap.keys())
+    for i in range(1, len(types)+1):
+        results = comb(types, i)
+        for result in results:
+            cnt = 1
+            for r in result:
+                cnt *= clothMap[r]
+            answer += cnt
     return answer
 
-print(solution(2, 10, [7,4,5,6]))
+print(solution([["yellow_hat", "headgear"], ["blue_sunglasses", "eyewear"], ["green_turban", "headgear"]]	))
