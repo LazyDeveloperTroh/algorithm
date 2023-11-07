@@ -11,8 +11,8 @@ while left <= right:
         result[0] = left
         result[1] = right
 
-    # 포인터가 겹치면 종료
-    if left + 1 == right or right - 1 == left:
+    # 포인터가 겹치면 종료, 포인터의 합이 0이면 종료
+    if left + 1 == right or right - 1 == left or (array[left] + array[right]) == 0:
         break
     
     # 좌측 포인터를 움직였을 때와 우측 포인터를 움직였을 때 값 비교
