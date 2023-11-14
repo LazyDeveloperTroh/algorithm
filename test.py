@@ -1,2 +1,2 @@
-for i in range(0   , 2):
-    print(i)
+array = [1,2,3,4,5]
+print(array[:1]+array[2:])

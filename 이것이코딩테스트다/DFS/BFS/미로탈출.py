@@ -3,6 +3,7 @@ N,M = map(int,input().split())
 graph = []
 for i in range(N):
     graph.append(list(map(int,input())))
+    
 dx = [-1, 1, 0 , 0]
 dy = [0, 0, -1, 1]
 def bfs(y, x):
